@@ -28,6 +28,12 @@ html:
   use_issues_button: true
   use_repository_button: true
 
+  extra_footer: |
+    <div>
+        This webpage is distributed under the terms of the <a href=https://choosealicense.com/licenses/mit/>MIT License</a>.
+        If you use this work, please cite it appropriately.
+    </div
+
 parse:
   myst_enable_extensions:
     - "amsmath"
@@ -45,9 +51,3 @@ sphinx:
   config:
     html_last_updated_fmt: "%b %d, %Y"
     suppress_warnings: ["mystnb.unknown_mime_type"]
-
-  extra_footer: |
-    <div>
-        This webpage is distributed under the terms of the <a href=https://choosealicense.com/licenses/mit/>MIT License</a>.
-        If you use this work, please cite it appropriately.
-    </div
