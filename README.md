@@ -3,6 +3,7 @@ A thorough introduction to DOLFINx.
 
 This documentation is experimental and likely to change.
 
+## Table of contents
 ```{tableofcontents}
 ```
 
