@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+title: DOLFINx Documentation
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Jørgen S.
+    family-names: Dokken
+    email: dokken@simula.no
+    affiliation: Simula Research Laboratory
+    orcid: 'https://orcid.org/0000-0001-6489-8858'
+repository-code: 'https://github.com/jorgensd/dolfinx_docs/'
+url: 'https://www.jsdokken.com/dolfinx_docs/README.html'
+keywords:
+  - DOLFINx
+  - Finte Element Methods
+  - Documentation
+license: MIT
+date-released: '2023-03-17'

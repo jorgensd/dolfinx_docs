@@ -24,22 +24,28 @@ repository:
 #   notebook_interface: "jupyterlab"
 #   binderhub_url: "https://mybinder.org"
 
-# Add GitHub buttons to your book
-# See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
   use_issues_button: true
   use_repository_button: true
 
+parse:
+  myst_enable_extensions:
+    - "amsmath"
+    - "colon_fence"
+    - "deflist"
+    - "dollarmath"
+    - "html_admonition"
+    - "html_image"
+    - "linkify"
+    - "replacements"
+    - "smartquotes"
+    - "substitution"
 
 sphinx:
   config:
     html_last_updated_fmt: "%b %d, %Y"
     suppress_warnings: ["mystnb.unknown_mime_type"]
 
-html:
-  use_issues_button: true
-  use_repository_button: true
-  use_edit_page_button: true
 
 extra_footer: |
   <div>

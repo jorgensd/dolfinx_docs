@@ -18,3 +18,5 @@ To create a one-time usage container you can call:
 docker run -ti -v $(pwd):/root/shared -w /root/shared --rm test_docs
 ```
 
+## Citing the documentation
+
