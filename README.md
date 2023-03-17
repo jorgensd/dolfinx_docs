@@ -20,6 +20,7 @@ docker run -ti -v $(pwd):/root/shared -w /root/shared --rm test_docs
 ```
 
 ## Citing the documentation
-To cite this repository, please use:
-*Dokken, J. S. (2023). DOLFINx Documentation [Computer software]. https://github.com/jorgensd/dolfinx_docs/*
-or see *Cite this Repository* on [Github](https://github.com/jorgensd/dolfinx_docs).
+To cite this repository, please use {cite}`webpage`:
+```{bibliography}
+:filter: docname in docnames
+```
