@@ -1,5 +1,8 @@
 FROM ghcr.io/fenics/dolfinx/lab:nightly
 
+RUN apt-get update && apt-get install -y libgl1-mesa-glx libxrender1 xvfb nodejs
+ENV PYVISTA_JUPYTER_BACKEND="panel"
+
 ADD docker/requirements.txt requirements.txt
 RUN python3 -m pip install -r requirements.txt
 
