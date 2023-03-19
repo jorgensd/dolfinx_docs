@@ -39,7 +39,7 @@ jobs:
 
 
       - name: Install apt dependencies and upgrade pip
-        run:
+        run: |
           apt-get update && apt-get install -y libgl1-mesa-glx libxrender1 xvfb nodejs
           python3 -m pip install -U pip
 
