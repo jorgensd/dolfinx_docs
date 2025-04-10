@@ -30,50 +30,50 @@ env:
 jobs:
   build-book:
     runs-on: ubuntu-latest
-    container: ghcr.io/fenics/dolfinx/lab:nightly
+    container: ghcr.io/fenics/dolfinx/lab:stable
     env:
-      PYVISTA_JUPYTER_BACKEND: "static"
+      PYVISTA_TRAME_SERVER_PROXY_PREFIX: "/proxy/"
+      PYVISTA_TRAME_SERVER_PROXY_ENABLED: "True"
+      PYVISTA_OFF_SCREEN: false
+      PYVISTA_JUPYTER_BACKEND: "html"
+      DISPLAY: ":99.0"
 
     steps:
       - uses: actions/checkout@v4
 
-
       - name: Install apt dependencies and upgrade pip
         run: |
-          apt-get update && apt-get install -y libgl1-mesa-glx libxrender1 xvfb nodejs
+          apt-get update && apt-get install -y libgl1-mesa-dev xvfb
           python3 -m pip install -U pip
 
       - name: Install book requirements
-        run:
-          python3 -m pip install --no-cache-dir -r docker/requirements.txt -U
+        run: python3 -m pip install .
 
       - name: Build book
-        run:
-          jupyter book build .
+        run: jupyter book build .
 
       - name: Upload book
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ${{ env.PUBLISH_DIR }}
           retention-days: 7
 
   deploy:
-      needs: build-book
-      environment:
-        name: github-pages
-        url: ${{ steps.deployment.outputs.page_url }}
+    needs: build-book
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
-      runs-on: ubuntu-latest
-      if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
 
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-        
-        - name: Setup Pages
-          uses: actions/configure-pages@v2
-    
-        
-        - name: Deploy to GitHub Pages
-          id: deployment
-          uses: actions/deploy-pages@v1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

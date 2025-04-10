@@ -1,23 +1,26 @@
 FROM ghcr.io/fenics/dolfinx/lab:nightly
 
-RUN apt-get update && apt-get install -y libgl1-mesa-glx libxrender1 xvfb nodejs
-ENV PYVISTA_JUPYTER_BACKEND="panel"
+RUN apt-get update && apt-get install -y libgl1-mesa-dev xvfb
+ENV DEB_PYTHON_INSTALL_LAYOUT=deb_system
+ENV PYVISTA_JUPYTER_BACKEND="static"
+ENV PYVISTA_TRAME_SERVER_PROXY_PREFIX="proxy/"
+ENV PYVISTA_TRAME_SERVER_PROXY_ENABLED="True"
+ENV PYVISTA_OFF_SCREEN="false"
+ENV PYVISTA_JUPYTER_BACKEND="html"
+ENV DISPLAY=":99.0"
 
-ADD docker/requirements.txt requirements.txt
-RUN python3 -m pip install -r requirements.txt
+
+ADD pyproject.toml ./pyproject.toml
+RUN python3 -m pip install .
 
 # create user with a home directory
 ARG NB_USER=jovyan
 ARG NB_UID=1000
-RUN useradd -m ${NB_USER} -u ${NB_UID}
-ENV HOME /home/${NB_USER}
-
-# for binder: base image upgrades lab to require jupyter-server 2,
-# but binder explicitly launches jupyter-notebook
-# force binder to launch jupyter-server instead
-RUN nb=$(which jupyter-notebook) \
-    && rm $nb \
-    && ln -s $(which jupyter-lab) $nb
+# 24.04 adds `ubuntu` as uid 1000;
+# remove it if it already exists before creating our user
+RUN id -nu ${NB_UID} && userdel --force $(id -nu ${NB_UID}) || true; \
+    useradd -m ${NB_USER} -u ${NB_UID}
+ENV HOME=/home/${NB_USER}
 
 # Copy home directory for usage in binder
 WORKDIR ${HOME}
