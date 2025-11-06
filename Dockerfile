@@ -1,13 +1,11 @@
 FROM ghcr.io/fenics/dolfinx/lab:nightly
 
-RUN apt-get update && apt-get install -y libgl1-mesa-dev xvfb
+RUN apt-get update && apt-get install -y libgl1-mesa-dev mesa-utils
 ENV DEB_PYTHON_INSTALL_LAYOUT=deb_system
-ENV PYVISTA_JUPYTER_BACKEND="static"
 ENV PYVISTA_TRAME_SERVER_PROXY_PREFIX="proxy/"
 ENV PYVISTA_TRAME_SERVER_PROXY_ENABLED="True"
 ENV PYVISTA_OFF_SCREEN="false"
 ENV PYVISTA_JUPYTER_BACKEND="html"
-ENV DISPLAY=":99.0"
 
 
 ADD pyproject.toml ./pyproject.toml
