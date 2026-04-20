@@ -50,7 +50,7 @@ jobs:
         run: jupyter book build .
 
       - name: Upload book
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ${{ env.PUBLISH_DIR }}
           retention-days: 7
