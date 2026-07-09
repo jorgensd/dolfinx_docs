@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "DOLFINx_Docs"
-version = "0.10.0"
+version = "0.11.0"
 dependencies = [
     "jupyter-book<2.0.0",
     "pyvista[all]>=0.45.0",
-    "fenics-dolfinx>=0.10.0,<0.11.0",
+    "fenics-dolfinx>=0.11.0,<0.12.0",
     "ipyparallel",
     "ipykernel<7.0.0",
 ]
